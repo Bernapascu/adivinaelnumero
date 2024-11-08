@@ -1,0 +1,80 @@
+body {
+    background-color: #f0f8ff; /* Un fondo más claro */
+    font-family: 'Verdana', sans-serif; /* Cambiar la fuente */
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 350px; /* Reducir el ancho del contenedor */
+    margin: auto;
+    background: #ffffff; /* Fondo blanco para el contenedor */
+    border-radius: 15px; /* Bordes más redondeados */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* Sombra más intensa */
+    padding: 20px; /* Ajustar el padding */
+}
+
+h1 {
+    color: #ff4500; /* Cambiar el color del título */
+    font-size: 2rem; /* Reducir el tamaño del título */
+    margin-bottom: 15px; /* Ajustar el margen inferior */
+}
+
+input[type="text"],
+input[type="number"] {
+    padding: 8px; /* Reducir el padding */
+    width: calc(100% - 16px); /* Ajustar el ancho */
+    margin: 8px 0; /* Ajustar el margen */
+    border: 2px solid #ff4500; /* Cambiar el color del borde */
+    border-radius: 5px; /* Bordes más redondeados */
+    font-size: 14px; /* Reducir el tamaño de la fuente */
+}
+
+button {
+    padding: 8px 15px; /* Reducir el padding */
+    background-color: #ff4500; /* Cambiar el color de fondo */
+    color: white;
+    border: none;
+    border-radius: 5px; /* Bordes más redondeados */
+    cursor: pointer;
+    font-size: 14px; /* Reducir el tamaño de la fuente */
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #e03e00; /* Color de fondo al pasar el mouse */
+}
+
+.game {
+    margin-top: 20px; /* Ajustar el margen superior */
+}
+
+#result {
+    margin-top: 10px; /* Ajustar el margen superior */
+    font-weight: bold;
+    color: #333;
+}
+
+.score-table {
+    width: 100%;
+    margin-top: 20px; /* Ajustar el espacio entre el juego y la tabla */
+    border-collapse: collapse;
+    font-size: 16px; /* Ajustar el tamaño de la fuente de la tabla */
+}
+
+.score-table th,
+.score-table td {
+    border: 1px solid #ff4500; /* Cambiar el color del borde */
+    padding: 10px; /* Reducir el padding */
+    text-align: center;
+}
+
+.score-table th {
+    background-color: #ff4500; /* Cambiar el color de fondo del encabezado */
+    color: white;
+}
+
+.score-table td {
+    background-color: #f9f9f9; /* Cambiar el color de fondo de las celdas */
+}

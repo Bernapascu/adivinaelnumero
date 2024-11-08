@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego Adivina el número</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>¡Adivina el número!</h1>
+        <div id="usernameSection">
+            <input type="text" id="username" placeholder="Tu nombre" onkeypress="handleKeyPress(event)">
+            <button onclick="setUsername()">Iniciar juego</button>
+        </div>
+
+        <div id="game" class="game" style="display: none;">
+            <p>He pensado en un número entre 1 y 100.</p>
+            <input type="number" id="guess" placeholder="Tu adivinanza" min="1" max="100" onkeypress="handleKeyPress(event)">
+            <button onclick="checkGuess()">Adivinar</button>
+            <p id="result"></p>
+        </div>
+
+        <div id="scoreSection" style="display: none;">
+            <h2>Resultados</h2>
+            <table class="score-table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Intentos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td id="nameCell"></td>
+                        <td id="attemptsCell"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        let randomNumber;
+        let attempts = 0;
+        let username = '';
+        let scores = []; // Arreglo para almacenar los nombres y los intentos
+
+        function setUsername() {
+            username = document.getElementById('username').value.trim();
+            if (username) {
+                document.getElementById('usernameSection').style.display = 'none';
+                document.getElementById('game').style.display = 'block';
+                document.getElementById('scoreSection').style.display = 'block';
+                document.getElementById('nameCell').textContent = username;
+                startGame();
+            } else {
+                alert("Por favor, introduce un nombre.");
+            }
+        }
+
+        function startGame() {
+            randomNumber = Math.floor(Math.random() * 100) + 1;
+            attempts = 0;
+            document.getElementById('result').textContent = '';
+        }
+
+        function checkGuess() {
+            const userGuess = parseInt(document.getElementById('guess').value);
+            attempts++;
+            const result = document.getElementById('result');
+
+            if (userGuess < 1 || userGuess > 100) {
+                result.textContent = "Introduce un número entre 1 y 100.";
+            } else if (userGuess === randomNumber) {
+                result.textContent = `¡Correcto, ${username}! El número era ${randomNumber}. Lo adivinaste en ${attempts} intentos.`;
+                document.getElementById('attemptsCell').textContent = attempts;
+                scores.push({ name: username, attempts: attempts }); // Guardar el nombre y los intentos
+                displayScores(); // Mostrar los puntajes
+                startGame();
+            } else if (userGuess < randomNumber) {
+                result.textContent = "¡Demasiado bajo! Intenta de nuevo.";
+            } else {
+                result.textContent = "¡Demasiado alto! Intenta de nuevo.";
+            }
+
+            document.getElementById('guess').value = '';
+        }
+
+        function displayScores() {
+            const scoreTableBody = document.querySelector('.score-table tbody');
+            scoreTableBody.innerHTML = ''; // Limpiar la tabla antes de mostrar los nuevos puntajes
+            scores.forEach(score => {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${score.name}</td><td>${score.attempts}</td>`;
+                scoreTableBody.appendChild(row);
+            });
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                if (username === '') {
+                    setUsername();
+                } else {
+                    checkGuess();
+                }
+            }
+        }
+    </script>
+</body>
+</html>
